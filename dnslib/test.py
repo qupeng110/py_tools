@@ -25,6 +25,10 @@ def arg_parse(paramer):
     for rdata in data.answer[-1]:
         rr_str = rr_str + str(rdata.to_text()) + ','
     #pdb.set_trace()
+    if par_dic.has_key('ttl') and int(par_dic['ttl']) == 1:
+        rr_str = rr_str + str(data.answer[0].ttl)
+    else:
+        rr_str = rr_str[:-1]
     return rr_str
 
 def application(environ,start_response):
@@ -34,5 +38,5 @@ def application(environ,start_response):
         yield rr
 
 if __name__ == '__main__':
-    print arg_parse('domain=dnstemplatenregion001.sina.com.cn&ip=32.22.12.25')
+    print arg_parse('domain=dnstemplatenregion001.sina.com.cn&ip=32.22.12.25&ttl=1')
 
